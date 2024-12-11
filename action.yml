@@ -1,0 +1,23 @@
+name: "AI Code Reviewer"
+description: "A GitHub Action to review code using OpenAI's API and provide comments on pull requests."
+author: "Vrinda1725"
+inputs:
+  GITHUB_TOKEN:
+    description: "GitHub token to interact with the repository"
+    required: true
+  OPENAI_API_KEY:
+    description: "OpenAI API key for code review"
+    required: true
+  OPENAI_API_MODEL:
+    description: "OpenAI model to use (e.g., gpt-4)"
+    required: false
+    default: "gpt-4"
+  include:
+    description: "Files to include in the review (e.g., README.md)"
+    required: false
+runs:
+  using: "node16"
+  main: "index.js" # Ensure your JavaScript logic is defined in this file
+branding:
+  icon: "book"
+  color: "blue"
