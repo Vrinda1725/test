@@ -1,0 +1,31 @@
+name: AI Code Reviewer
+
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: AI Code Reviewer
+      uses: tarundwivedi/Mobile_AI_quickStart@main
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        OPENAI_API_MODEL: "gpt-4" # Optional, defaults to gpt-4 if omitted
+        include: "README.md" # Specify only the README file to be reviewed
+
+    - name: Post review summary
+      run: echo "AI review of README.md completed. Check the pull request comments for details."
